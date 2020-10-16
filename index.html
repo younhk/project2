@@ -6,30 +6,86 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2020 여행주간.main</title>
     <link href="css/style.css" rel="stylesheet" type="text/css">
-    
-    
-<script>
-	function showLeftMenu(){
-		var circleBtObj = document.getElementById('circleBt');
-		var leftMenuObj = document.getElementById('hideMenuBodyId');
-		circleBtObj.style['display'] = "none";
-		leftMenuObj.style['transform'] = "translate(0px, 0px)";
-		
-		leftMenuObj.style['msTransform'] = "translate(0px, 0px)";
-		leftMenuObj.style['mozTransform'] = "translate(0px, 0px)";
-		leftMenuObj.style['webkitTransform'] = "translate(0px, 0px)";
-		leftMenuObj.style['oTransform'] = "translate(0px, 0px)";
-	}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-	function closeLeftMenu() {
-		var circleBtObj = document.getElementById('circleBt');
-		var leftMenuObj = document.getElementById('hideMenuBodyId');
+    <script>
+        $(document).ready(function() {
+            mobile_menu();
+        });
 
-		circleBtObj.style['display'] = "block";
-		leftMenuObj.removeAttribute("style");
-	}
-</script>
+        function mobile_menu() {
+            /* 변수 선언 */
+            var $menu = null;
+            var $left_gnb = null; // 영역 전체
+            var $depth1_wrap = null;
+            var $depth1 = null;
+            var $depth1_btn = null;
+
+            /* 시작 함수 */
+            function start() {
+                init();
+                init_event();
+            }
+            /* 변수 초기화 함수 */
+            function init() {
+                $menu = $('.menu');
+                $left_gnb = $('.left_gnbWrap'); // 영역 전체
+                $depth1_wrap = $('.left_gnb>li');
+                $depth1 = $depth1_wrap.children('ul');
+                $depth1_btn = $depth1_wrap.children('a');
+            }
+            /* 이벤트 함수 */
+            function init_event() {
+
+                /* 모바일 메뉴 버튼 클릭했을때 모바일 메뉴영역 나오게 하기 */
+                $menu.click(function(event) {
+                    event.preventDefault();
+                    $left_gnb.addClass('on');
+                });
+
+                /* x버튼 눌렀을때 모바일 메뉴 닫기 */
+                $('.close').click(function(event) {
+                    event.preventDefault();
+
+                    $left_gnb.removeClass('on');
+
+                    // x버튼 누르면 시간차 약간두고 소메뉴 닫히게 하기
+                    setTimeout(function() {
+                        $depth1_btn.removeClass('on');
+                        $depth1.slideUp();
+                    }, 300)
+                });
+
+                /* depth1의 각메뉴 클릭시 depth2 나오게 하기 */
+                $depth1_btn.click(function(event) {
+                    event.preventDefault();
+                    var $this = $(this);
+                    var $this_ul = $this.siblings('ul');
+
+                    var check = $this.hasClass('on');
+                    if (check) {
+                        $this.removeClass('on');
+                        $this_ul.stop(true, true).slideUp();
+                    } else {
+                        $depth1_btn.removeClass('on');
+                        $depth1.stop().slideUp();
+                        $this.addClass('on');
+                        $this_ul.stop(true, true).slideDown();
+                    }
+                });
+
+                /* 디바이스 크기 변경시 모바일 메뉴영역 숨기기 */
+                $(window).resize(function() {
+                    $left_gnb.removeClass('on');
+                });
+            }
+
+            start(); // 시작 호출
+        }
+    </script>
     
+    
+
 </head>
 
 <body>
@@ -58,22 +114,61 @@
                         <li><a href="festival.html">검색</a></li>
                         <li><a href="festival.html">로그인</a></li>
                     </ul>
-                    <div class="VirtualView">
-                        <div class="hideMenuBody" id="hideMenuBodyId">
-                            <div>Menu 1</div>
-                            <div>Menu 2</div>
-                            <div>Menu 3</div>
-                            <div>Menu 4</div>
-                            <div>Menu 5</div>
-                            <div onclick="closeLeftMenu(); return false;">Close</div>
-                        </div>
 
-                        <div class="circleBt" id="circleBt" onclick="showLeftMenu(this); return false;">
-                            <div style="margin-top: 13px;"></div>
-                            <div></div>
-                            <div></div>
-                        </div>
+                    
+                    <div class="menu">
+                        <a href="#"><img src="images/mobile_menu1.png" alt="이미지"></a>
                     </div>
+                    <nav class="left_gnbWrap">
+                        <a href="#" class="close">close</a>
+                        <ul class="left_gnb">
+                            <li>
+                                <a href="index.html">홈</a>
+                               
+                            </li>
+                            <li>
+                                <a href="festival.html">내주변</a>
+                                
+                            </li>
+                            <li>
+                                <a href="#">추천</a>
+                               
+                            </li>
+                            <li>
+                                <a href="#">여행지</a>
+                               
+                            </li>
+                            <li>
+                                <a href="#">코스</a>
+                               
+                            </li>
+                            <li>
+                                <a href="#">축제</a>
+                               
+                            </li>
+                            <li>
+                                <a href="#">이벤트</a>
+                               
+                            </li>
+                            <li>
+                                <a href="#">MY</a>
+                               
+                            </li>
+                            <li>
+                                <a href="#">검색</a>
+                               
+                            </li>
+                            <li>
+                                <a href="#">로그인</a>
+                               
+                            </li>
+                        </ul>
+                    </nav>
+
+                    
+
+
+
                 </div>
             </div>
 
@@ -117,7 +212,8 @@
                             </div>
 
                             <div class="recomend_middle">
-                                <div>
+                               
+                                <div class="recomend_middle_c1">
                                     <!--컨텐츠 1-1-->
                                     <div class="recomend_group">
 
@@ -319,10 +415,218 @@
                                         <div class="right"><a href="#"><img src="images/main_c1_img01.png" alt="조천연꽃공원"></a>
                                         </div>
                                     </div>
-
-
-
                                 </div>
+                                
+                                
+                                <div class="recomend_middle_c2">
+                                
+                                <!--컨텐츠 2-1-->
+                                    <div class="recomend_group">
+
+
+                                        <div class="main_mobile_c1_img">
+                                            <a href="#"><img src="images/main_c1_mobile_img1.png"></a>
+                                        </div>
+
+
+                                        <div class="left">
+                                            <div class="re_title">
+                                                <h1 class="line"></h1>
+                                                <h3>조천연꽃공원</h3>
+                                            </div>
+                                            <div class="re_text">
+                                                <dl>
+                                                    <dt>문의 및 안내</dt>
+                                                    <dd>044-300-5335</dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>홈페이지</dt>
+                                                    <dd>바로가기</dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>주소</dt>
+                                                    <dd>세종특별자치시 조치원읍 번암리 226</dd>
+                                                </dl>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="right"><a href="#"><img src="images/main_c2_img01.png" alt="조천연꽃공원"></a>
+                                        </div>
+                                    </div>
+
+                                    <!--컨텐츠 2-2-->
+                                    <div class="recomend_group">
+
+                                        <div class="main_mobile_c1_img">
+                                            <a href="#"><img src="images/main_c1_mobile_img2.png"></a>
+                                        </div>
+
+                                        <div class="left">
+                                            <div class="re_title">
+                                                <h1 class="line"></h1>
+                                                <h3>동두천시 자연휴양림</h3>
+                                            </div>
+                                            <div class="re_text">
+                                                <dl>
+                                                    <dt>문의 및 안내</dt>
+                                                    <dd>동두천 광광휴양과 031-860-3259</dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>홈페이지</dt>
+                                                    <dd>바로가기</dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>주소</dt>
+                                                    <dd>경기도 동두천시 탑동가산로1</dd>
+                                                </dl>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="right"><a href="#"><img src="images/main_c2_img02.png" alt="동두천시 자연휴양림"></a>
+                                        </div>
+                                    </div>
+
+                                    <!--컨텐츠 2-3-->
+                                    <div class="recomend_group">
+
+                                        <div class="main_mobile_c1_img">
+                                            <a href="#"><img src="images/main_c1_mobile_img3.png"></a>
+                                        </div>
+
+                                        <div class="left">
+                                            <div class="re_title">
+                                                <h1 class="line"></h1>
+                                                <h3>호미반도 해안둘레길</h3>
+                                            </div>
+                                            <div class="re_text">
+                                                <dl>
+                                                    <dt>문의 및 안내</dt>
+                                                    <dd>054-270-3203</dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>홈페이지</dt>
+                                                    <dd>비로가기</dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>주소</dt>
+                                                    <dd>경상북도 포항시 남구 동해면</dd>
+                                                </dl>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="right"><a href="#"><img src="images/main_c2_img03.png" alt="호미반도 해안둘레길"></a>
+                                        </div>
+                                    </div>
+
+                                    <!--컨텐츠 2-4-->
+                                    <div class="recomend_group">
+
+                                        <div class="main_mobile_c1_img">
+                                            <a href="#"><img src="images/main_c1_mobile_img4.png"></a>
+                                        </div>
+
+                                        <div class="left">
+                                            <div class="re_title">
+                                                <h1 class="line"></h1>
+                                                <h3>등기산스카이워크</h3>
+                                            </div>
+                                            <div class="re_text">
+                                                <dl>
+                                                    <dt>문의 및 안내</dt>
+                                                    <dd>054-740-7362</dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>홈페이지</dt>
+                                                    <dd>바로가기</dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>주소</dt>
+                                                    <dd>경상북도 울진군 후포면</dd>
+                                                </dl>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="right"><a href="#"><img src="images/main_c2_img04.png" alt="등기산스카이워크"></a>
+                                        </div>
+                                    </div>
+
+                                    <!--컨텐츠 2-5-->
+                                    <div class="recomend_group">
+
+                                        <div class="main_mobile_c1_img">
+                                            <a href="#"><img src="images/main_c1_mobile_img5.png"></a>
+                                        </div>
+
+                                        <div class="left">
+                                            <div class="re_title">
+                                                <h1 class="line"></h1>
+                                                <h3>교동도(강화)</h3>
+                                            </div>
+                                            <div class="re_text">
+                                                <dl>
+                                                    <dt>문의 및 안내</dt>
+                                                    <dd>032-934-1000</dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>홈페이지</dt>
+                                                    <dd>바로가기</dd>
+                                                </dl>
+
+                                                <dl>
+                                                    <dt>주소</dt>
+                                                    <dd>인천광역시 강화군 교동면 교동남로 35</dd>
+                                                </dl>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="right"><a href="#"><img src="images/main_c2_img05.png" alt="교동도(강화)"></a>
+                                        </div>
+                                    </div>
+
+                                    <!--컨텐츠 2-6-->
+                                    <div class="recomend_group">
+
+                                        <div class="main_mobile_c1_img">
+                                            <a href="#"><img src="images/main_c1_mobile_img6.png"></a>
+                                        </div>
+
+                                        <div class="left">
+                                            <div class="re_title">
+                                                <h1 class="line"></h1>
+                                                <h3>물영아리 오름</h3>
+                                            </div>
+                                            <div class="re_text">
+                                                <dl>
+                                                    <dt>주소</dt>
+                                                    <dd>제주특별자치도<br>서귀포시 남원읍 남조로 988-11</dd>
+                                                </dl>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="right"><a href="#"><img src="images/main_c2_img06.png" alt="조천연꽃공원"></a>
+                                        </div>
+                                    </div>
+                                
+                                
+                                
+                                </div>
+                                
+                                
                             </div>
 
 
@@ -477,6 +781,4 @@
 
     </div>
 
-</body>
-
-</html>
+</body></html>

@@ -1,9 +1,8 @@
 
 
-
 $(function(){
     
-    $('.VirtualView').click(function(){
+    $('.showLeftMenu').click(function(){
         
        var circleBtObj = document.getElementById('circleBt');
 		var leftMenuObj = document.getElementById('hideMenuBodyId');
@@ -15,38 +14,20 @@ $(function(){
 		leftMenuObj.style['webkitTransform'] = "translate(0px, 0px)";
 		leftMenuObj.style['oTransform'] = "translate(0px, 0px)"; 
         
-    })
+    });
     
-    $('').
-});
-
-
-
-
-
-
-
-    
-    function showLeftMenu(){
-		var circleBtObj = document.getElementById('circleBt');
-		var leftMenuObj = document.getElementById('hideMenuBodyId');
-		circleBtObj.style['display'] = "none";
-		leftMenuObj.style['transform'] = "translate(0px, 0px)";
-		
-		leftMenuObj.style['msTransform'] = "translate(0px, 0px)";
-		leftMenuObj.style['mozTransform'] = "translate(0px, 0px)";
-		leftMenuObj.style['webkitTransform'] = "translate(0px, 0px)";
-		leftMenuObj.style['oTransform'] = "translate(0px, 0px)";
-	}
-
-	function closeLeftMenu() {
+    $('.closeLeftMenu').click(function(){
+        
+       function closeLeftMenu() {
 		var circleBtObj = document.getElementById('circleBt');
 		var leftMenuObj = document.getElementById('hideMenuBodyId');
 
 		circleBtObj.style['display'] = "block";
-		leftMenuObj.removeAttribute("style");
-	}
-
-
+		leftMenuObj.removeAttribute("style"); 
         
+    });
+});
+
+
+
 

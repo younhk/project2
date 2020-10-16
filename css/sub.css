@@ -1,13 +1,16 @@
+
+
 /*메인이미지부분*/
 
-.f_back_img{width: 1920px; height: 596px;
-            background: url(../images/c_01_back.png) no-repeat 50%;
+.f_back_img{width: 100%; height: 480px;
+            background: url(../images/f_back_img.png) no-repeat 50%;
+            height: 0;
+            padding-top: calc(480/1920*100%);
             background-position: top;
             margin: 0 auto;}
 
 
 /*컨텐츠부분*/
-
 .contents{width: 100%; height: 2300px;
           position: relative;}
 
@@ -18,13 +21,13 @@
          background-color: #ffffff;
          margin: 0 auto;
          left: 0; right: 0; 
-          top:-14%;
+          top:-6%;
          box-shadow: -10px -10px 20px #999;}
-.contents_back_text{width: 13%;
+.contents_back_text{width: 100%;
                     text-align: center;
                     position: absolute;
-                    top:-17%;
-                    font-size: 10.1rem;
+                    top:-9.5%;
+                    font-size: 11rem;
                     margin: 0 auto;
                     left: 0; right: 0;
                     font-family: 'Passion One', cursive;
@@ -86,6 +89,9 @@
 .festival_group{height: 340px;
                 box-sizing: border-box;}
 
+.mobile_festival_img{display: none;
+                     width: 487px; height: 125px;}
+
 .festival_group>.left{width: 48%;
                       float: left;}
 .festival_info{height: 240px;}
@@ -122,9 +128,9 @@
                                  text-align: center;
                                  display: inline-block;
                                  background-color: rgba(0,0,0,0.5);
-                                 width: 450px; height: 241px;
+                                 width: 100%; height: 100%;
                                  z-index: 1;
-                                 padding-top: 25%;
+                                 padding-top: 100px;
                                  cursor: pointer;}
 .festival_group>.right{}
 .festival_group>.right img{transition: all 0.4s;}
@@ -134,17 +140,84 @@
 
 .festival_page{width: 100%;height: 200px;}
 .festival_page ul{width: 150px;
-                  margin: 0 auto;}
+                  margin: 0 auto;
+                  margin-top:100px;}
 .festival_page>ul>li{width: 40px; height: 40px;
                      background-color: #000; 
                      float: left;
                      color: #fff; 
                      text-align: center;
                      border-radius: 5px 5px;
-                     margin: 0 10px 0 0;}
+                     margin: 0 10px 0 0;
+                     line-height: 40px;
+                     font-size:1.2rem;
+                     cursor: pointer;}
 
+/*모바일-1279*/
 
+@media (max-width:1279px) {
+    .logo{width: 15%;}
+    .contents{margin-top:0;}
+    .f_back_img{width:100%;
+                padding-top: calc(596/1920*100%);
+                height: 0;
+                margin: 0 auto;}
+    .contents_back_text{top:-10%}
+    .back_box{width: 80%;
+              top:-7%;}
+    .festival{width: 90%;}
+    .festival_title>.line{width: 3%}
+    .festival_title>h2{font-size:2.7rem;}
+    
+    .seoson>ul{width: 100%;}
+    .seoson>ul>a{width: 18%;}
+    .seoson>ul>a>li{font-size:1.3rem;}
+    .month_in>ul>a{width: 8%;
+                   margin:25px 0 0 35px;}
+    .spring{height: 1650px;}
+    .festival_info>.info_title>.line{width: 5%;}
+    .festival_info>.info_title>h2{font-size:2rem;}
+    .festival_info>.info_text>dl>dt{font-size:1.3rem;}
+    .festival_info>.info_text>dl>dd{font-size:1.3rem;}
+    
+    .festival_page{height: 150px;}
+    
+    .festival_group>.right{width: 48%}
+    
+    
+    
+    
+}
 
+/*모바일-768*/
+
+@media (max-width:768px) {
+    
+    .back_box{height: 3200px;
+             top:-1%;}
+    .contents_back_text{font-size:7rem;
+                        top:-2.5%;}
+    
+    .seoson{height: 250px;}
+    .month{height: 150px;}
+    .seoson>ul>a{width: 100%;
+                 margin-left: 0;
+                 margin-bottom: 3%}
+    .contents{height: 3200px;}
+    .spring{height: 2380px;}
+    .festival_group{height: 450px;
+                    border-bottom:1px solid #999;}
+    .festival_group:last-of-type{}
+    .mobile_festival_img{display: block;
+                         width: 100%;
+                         margin-top: 50px;
+                         margin-bottom: 30px;
+                         text-align: center;}
+    .mobile_festival_img img{width: 100%;}
+    .festival_group>.left{width: 100%;}
+    .festival_group>.right{display: none;}
+    .festival_page{height: 300px;}
+}
 
 
 
